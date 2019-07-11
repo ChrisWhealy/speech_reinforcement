@@ -26,7 +26,7 @@ These instructions assume you have already installed Rust and `wasm-pack`, and t
 All inputs are made using the range sliders.  The sliders can be moved either by dragging the button with the mouse, or for more precise input, select the slider and use the left/right arrow keys.
 
 ***Warning***  
-This version of the software does not perform any plausibility checks for the input values.  Therefore it is possible to create implausible input combinations; for instance, having the nearest listener positioned further way than the farthest listener.
+This version of the software does not perform any plausibility checks for the input values.  Therefore it is possible to create implausible input combinations; for instance, having the nearest listener positioned further away than the farthest listener.
 
 If you notice the `NAG` value has become negative, then you have an implausible combination of input values.
 
