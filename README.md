@@ -1,5 +1,7 @@
 # Speech Reinforcement Calculator
 
+Calculates needed acoustic gain (NAG) compared to potential acoustic gain (PAG) and accounts for gain loss due to open mics and a feedback stability margin.
+
 The Web page was written as an exercise in getting a Web Assembly program (originally written in Rust) to interact with the JavaScript coding running in a browser.
 
 
