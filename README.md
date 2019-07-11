@@ -1,6 +1,6 @@
 # Speech Reinforcement Calculator
 
-The web page was written as an exercise in getting a Web Assembly program (originally written in Rust) to interact with the JavaScript coding running in a browser.
+The Web page was written as an exercise in getting a Web Assembly program (originally written in Rust) to interact with the JavaScript coding running in a browser.
 
 
 ## Architecture
@@ -24,7 +24,7 @@ These instructions assume you have already installed Rust and `wasm-pack`, and t
 All inputs are made using the range sliders.  The sliders can be moved either by dragging the button with the mouse, or for more precise input, select the slider and use the left/right arrow keys.
 
 ***Warning***  
-This version od the software does not perform any plausibility checks for the input values.  Therefore it is possible to create implausible input combinations, such as having the nearest listener positioned further way than the farthest listener.
+This version of the software does not perform any plausibility checks for the input values.  Therefore it is possible to create implausible input combinations; for instance, having the nearest listener positioned further way than the farthest listener.
 
-If you notice the `NAG` value has become negative, then you have an implausible combinatino of input values.
+If you notice the `NAG` value has become negative, then you have an implausible combination of input values.
 
