@@ -4,17 +4,21 @@ Calculates needed acoustic gain (NAG) compared to potential acoustic gain (PAG) 
 
 The Web page was written as an exercise in getting a Web Assembly program (originally written in Rust) to interact with the JavaScript coding running in a browser.
 
+## Online Version
+
+An online version of this tools is available [here](http://whealy.com/acoustics/SR_Calculator/index.html)
+
 
 ## Architecture
 
 The WASM function receives 6 arguments and from these, it calculates various gain values.  This functionality is trivial because the learning objective here is familiarisation with how a WASM module interacts with JavaScript via the [`wasm-bindgen`](https://rustwasm.github.io/wasm-bindgen/introduction.html) and [`serde`](https://serde.rs/) libraries.
 
-## Installation
+## Local Installation
 
 These instructions assume you have already installed Rust and `wasm-pack`, and that Python3 is available to act as a Web server.
 
 1. Clone this repo
-2. Change into the top-level directory
+2. Change into the repo's top-level directory
 3. Compile using `wasm-pack build --release --target web`
 4. Start a Python3 Web server using `python3 -m http.server`
 5. Visit <http://0.0.0.0:8000>

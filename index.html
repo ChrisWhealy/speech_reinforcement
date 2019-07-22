@@ -36,19 +36,19 @@
     </div>
 
     <div class="summary_row">
-      <div class="summary_cell term">Gain lost through NoM</div>
+      <div class="summary_cell term">Gain lost through NOM</div>
       <div class="summary_cell"><input type="number" readonly id="nom_gain_loss"> dB</div>
       <div class="summary_cell definition">Every open mic creates a potential feedback path and thus reduces your PAG</div>
     </div>
 
     <div class="summary_row">
-      <div class="summary_cell term">PAG after accounting for NoM</div>
+      <div class="summary_cell term">PAG after accounting for NOM</div>
       <div class="summary_cell"><input type="number" readonly id="pag_after_nom"> dB</div>
-      <div class="summary_cell definition">PAG minus gain loss due to NoM</div>
+      <div class="summary_cell definition">PAG minus gain loss due to NOM</div>
     </div>
 
     <div class="summary_row">
-      <div class="summary_cell term">PAG after accounting for NoM and FSM</div>
+      <div class="summary_cell term">PAG after accounting for NOM and FSM</div>
       <div class="summary_cell"><input type="number" readonly id="pag_after_nom_fsm"> dB</div>
       <div class="summary_cell definition">To avoid running the system on the verge of feedback, the PAG value is further reduced by the FSM</div>
     </div>
@@ -62,7 +62,7 @@
     <div class="summary_row">
       <div class="summary_cell term">Should you be safe from feedback?</div>
       <div class="summary_cell_image"><span id="safe"></span></div>
-      <div class="summary_cell definition">As long as <tt>(PAG - NoM - FSM) &gt; NAG</tt> is true, then you should be safe from feedback</div>
+      <div class="summary_cell definition">As long as <tt>(PAG - NOM - FSM) &gt; NAG</tt> is true, then you should be safe from feedback</div>
     </div>
   </div>
 
@@ -116,7 +116,7 @@
     </div>
 
     <div class="param_row">
-      <div class="param_cell desc">Number of open mics (NoM)</div>
+      <div class="param_cell desc">Number of open mics (NOM)</div>
       <div class="param_cell"><input type="range" min="1" max="20" step="1" value="3" id="nom" oninput="update_screen()"></div>
       <div class="param_cell unit" id="nom_value"></div>
     </div>
