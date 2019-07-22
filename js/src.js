@@ -4,6 +4,9 @@
  * (c) Chris Whealy 2019
  **********************************************************************************************************************/
 
+// Identity funtion
+const idiot = val => val
+
 // A useful version of the Array.push()
 const push = (el, arr) => (_ => arr)(arr.push(el))
 
@@ -14,21 +17,23 @@ const filterInbound  = onlyDirection("in")
 const filterOutbound = onlyDirection("out")
 
 // Fetch required input values from the DOM
-const fetchFloatFromInputElement = elementId => parseFloat(document.getElementById(elementId).value)
-const fetchIntFromInputElement   = elementId => parseInt(document.getElementById(elementId).value)
+const fetchElementValue = parseFn => elementId => parseFn(document.getElementById(elementId).value)
+
+const fetchFloat = fetchElementValue(parseFloat)
+const fetchInt   = fetchElementValue(parseInt)
+const fetchText  = fetchElementValue(idiot)
 
 // Slice off the "$" character at the start of all numeric values returned from Rust via wasm-bindgen
-const writeFloatToElementValue = (elementId, val)  => document.getElementById(elementId).value = val.slice(1)
+const writeFloat = (elementId, val) => document.getElementById(elementId).value = val.slice(1)
 
 // Static URLs to the tick and cross icons
 const url_tick  = "<img src='./img/icon_tick_32.png'>"
 const url_cross = "<img src='./img/icon_cross_32.png'>"
 
 // Boolean values are represented using the tick and cross icons
-const writeBoolToElementInnerHtml =
+const writeBooleanImg =
   (elementId, bool) =>
-    bool ? document.getElementById(elementId).innerHTML = url_tick
-         : document.getElementById(elementId).innerHTML = url_cross
+    document.getElementById(elementId).innerHTML = bool ? url_tick : url_cross
 
 // Display range slider value and convert its metric value to imperial units
 const show_and_convert_units = field => 
@@ -36,7 +41,7 @@ const show_and_convert_units = field =>
     value_el ? show_units(value, value_el, field)   : undefined
     unit_el  ? convert_units(value, unit_el, field) : undefined
   })
-  ( document.getElementById(field.id).value
+  ( fetchText(field.id)
   , document.getElementById(`${field.id}_value`)
   , document.getElementById(`${field.id}_units`))
 
@@ -86,19 +91,19 @@ const to_imperial = (units, val) => {
  * The WASM moduile returns a Rust struct that has been serialized by Serde into a JavaScript object
  **********************************************************************************************************************/
 const dom_metadata = [
-  { id : "source_to_mic",          type : "float",   units : "m",    direction: "in",  fetch : fetchFloatFromInputElement, update : null }
-, { id : "source_to_listener",     type : "float",   units : "m",    direction: "in",  fetch : fetchFloatFromInputElement, update : null }
-, { id : "source_to_listener_max", type : "float",   units : "m",    direction: "in",  fetch : fetchFloatFromInputElement, update : null }
-, { id : "nom",                    type : "int",     units : "each", direction: "in",  fetch : fetchIntFromInputElement,   update : null }
-, { id : "speaker_to_mic",         type : "float",   units : "m",    direction: "in",  fetch : fetchFloatFromInputElement, update : null }
-, { id : "speaker_to_listener",    type : "float",   units : "m",    direction: "in",  fetch : fetchFloatFromInputElement, update : null }
-, { id : "fsm",                    type : "float",   units : "dB",   direction: "in",  fetch : fetchFloatFromInputElement, update : null }
-, { id : "nom_gain_loss",          type : "float",   units : "dB",   direction: "out", fetch : null,                       update : writeFloatToElementValue }
-, { id : "pag",                    type : "float",   units : "dB",   direction: "out", fetch : null,                       update : writeFloatToElementValue }
-, { id : "pag_after_nom",          type : "float",   units : "dB",   direction: "out", fetch : null,                       update : writeFloatToElementValue }
-, { id : "pag_after_nom_fsm",      type : "float",   units : "dB",   direction: "out", fetch : null,                       update : writeFloatToElementValue }
-, { id : "nag",                    type : "float",   units : "dB",   direction: "out", fetch : null,                       update : writeFloatToElementValue }
-, { id : "safe",                   type : "boolean", units : null,   direction: "out", fetch : null,                       update : writeBoolToElementInnerHtml }
+  { id : "source_to_mic",          type : "float",   units : "m",    direction: "in",  fetch : fetchFloat, update : null }
+, { id : "source_to_listener",     type : "float",   units : "m",    direction: "in",  fetch : fetchFloat, update : null }
+, { id : "source_to_listener_max", type : "float",   units : "m",    direction: "in",  fetch : fetchFloat, update : null }
+, { id : "nom",                    type : "int",     units : "each", direction: "in",  fetch : fetchInt,   update : null }
+, { id : "speaker_to_mic",         type : "float",   units : "m",    direction: "in",  fetch : fetchFloat, update : null }
+, { id : "speaker_to_listener",    type : "float",   units : "m",    direction: "in",  fetch : fetchFloat, update : null }
+, { id : "fsm",                    type : "float",   units : "dB",   direction: "in",  fetch : fetchFloat, update : null }
+, { id : "nom_gain_loss",          type : "float",   units : "dB",   direction: "out", fetch : null,       update : writeFloat }
+, { id : "pag",                    type : "float",   units : "dB",   direction: "out", fetch : null,       update : writeFloat }
+, { id : "pag_after_nom",          type : "float",   units : "dB",   direction: "out", fetch : null,       update : writeFloat }
+, { id : "pag_after_nom_fsm",      type : "float",   units : "dB",   direction: "out", fetch : null,       update : writeFloat }
+, { id : "nag",                    type : "float",   units : "dB",   direction: "out", fetch : null,       update : writeFloat }
+, { id : "safe",                   type : "boolean", units : null,   direction: "out", fetch : null,       update : writeBooleanImg }
 ]
 
 const inbound  = dom_metadata.reduce(filterInbound, [])
