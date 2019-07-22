@@ -6,7 +6,7 @@ The Web page was written as an exercise in getting a Web Assembly program (origi
 
 ## Online Version
 
-An online version of this tools is available [here](http://whealy.com/acoustics/SR_Calculator/index.html)
+An online version of this tool is available [here](http://whealy.com/acoustics/SR_Calculator/index.html)
 
 
 ## Architecture
